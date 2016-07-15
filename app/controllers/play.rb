@@ -28,11 +28,12 @@ post '/play/game/check' do
   if card.answer == params[:answer]
     guess.correct = true
     if session[:card_order].length == 1
-      erb :results
+      erb :'play/results'
+    else
+      session[:card_order] = session[:card_order][1..-1]
+      @card = Card.find_by(id: session[:card_order][0])
+      erb :'/play/game'
     end
-    session[:card_order] = [1..-1]
-    @card = session[:card_order][0]
-    erb :'/play/game'
   else
     "YOU ARE WRONG!!!"
   end
