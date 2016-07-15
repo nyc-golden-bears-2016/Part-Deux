@@ -1,0 +1,14 @@
+<h1>Edit Deck</h1>
+
+<% if @errors %>
+  <ul>
+  <% @errors.each do |error| %>
+    <li><%= error %></li><br>
+  <% end %>
+  </ul>
+<%  end %>
+
+<form action='/deck' method="post">
+Category: <input type="text" name="deck[category]" placeholder="@deck.category">
+<input type="submit" value="Create Deck">
+</form>

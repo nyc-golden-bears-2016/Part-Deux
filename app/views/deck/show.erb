@@ -1,3 +1,24 @@
 <h2>You have selected the <%=@deck.category%> Category</h2>
 
-  <button>START</button>
+  <button>START GAME</button>
+  <%if current_user.id == @deck.user_id%>
+  <a href='/deck/<%= @deck.id %>/card/new'><button>ADD CARDS</button></a><br><br>
+  <%end%>
+
+  <%if current_user.id == @deck.user_id%>
+  <%@deck.cards.each do|card|%>
+  <div>
+  Card Question: <%=card.question%><br>
+  Card Answer: <%=card.answer%><br></div>
+  <a href="/deck/<%= @deck.id %>/card/<%=card.id%>/edit"><button>EDIT</button></a><br>
+
+  <form action="/deck/<%= "#{@deck.id}" %>/card/<%= "#{card.id}" %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="DELETE">
+</form>
+
+
+  <%end%>
+
+  <%end%>
+

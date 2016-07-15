@@ -27,3 +27,26 @@ get '/deck/:deck_id/card/:id' do
   @card = @deck.cards.find(params[:id])
   erb :'card/show'
 end
+
+get '/deck/:deck_id/card/:id/edit' do
+  @deck = Deck.find(params[:deck_id])
+  @card = @deck.cards.find(params[:id])
+  erb :'card/edit'
+end
+
+put '/deck/:deck_id/card/:id' do
+  @deck = Deck.find(params[:deck_id])
+  @card = @deck.cards.find(params[:id])
+  if @card.update_attributes(params[:card])
+    redirect "/deck/#{@deck.id}/card"
+  else
+    erb :'card/edit' #show edit card view again(potentially displaying errors)
+  end
+end
+
+delete '/deck/:deck_id/card/:id' do
+  @deck = Deck.find(params[:deck_id])
+  @card = @deck.cards.find(params[:id])
+  @card.destroy
+  redirect "/deck/#{@deck.id}"
+end
