@@ -1,0 +1,19 @@
+
+<h1>Add Card to <%=@deck.category%> Deck</h1>
+
+<% if @errors %>
+  <ul>
+  <% @errors.each do |error| %>
+    <li><%= error %></li><br>
+  <% end %>
+  </ul>
+<%  end %>
+
+
+<form action='/deck/<%=@deck.id%>/card' method="post">
+Question: <input type="text" name="card[question]">
+Answer: <input type="text" name="card[answer]">
+<input type="submit" value="Create Card">
+</form>
+
+<a href='/deck/<%=@deck.id%>'><button>Deck is Complete</button></a>
