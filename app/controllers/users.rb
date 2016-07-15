@@ -13,14 +13,16 @@ post '/users' do
   end
 end
 
+get '/login' do
+  erb :'/users/login'
+end
+
 post '/login' do
-  @username = params[:username]
-  @password = params[:password]
-  if User.find_by(username: params[:username]) && User.authenticate(@password)
-    user_id = User.find_by(username: @username).id
+  if User.find_by(username: params[:username]).try(:authenticate, params[:password] )
+    user_id = User.find_by(username: params[:username]).id
     # @user = User.find_by(username: @username)
     session[:user_id] = user_id
-    erb :'/'
+    redirect '/'
   else
     @errors = ["Incorrect username or password"]
     erb :'/users/login'

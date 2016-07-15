@@ -1,0 +1,15 @@
+
+<div class="container">
+  <h1>THE FLASH</h1>
+  <h5>...cards</h5>
+  <% unless logged_in? %>
+    <p>Please log in or create a new account!</p>
+
+    <p><a href="/users/new">Create Account</a></p>
+    <p><a href="/login">Log In</a></p>
+  <% end %>
+  <h1>Choose a deck</h1>
+  <% @decks.each do |deck| %>
+    <h3><a href="decks/<%= deck.id %>"><%= deck.category %></a></h3>
+  <% end %>
+</div>
