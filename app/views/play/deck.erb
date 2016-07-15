@@ -1,0 +1,4 @@
+<h2>You have chosen the <%= @deck.category %> Deck.</h2>
+<form method="post" action="/play/decks/<%= @deck.id%>">
+<input type="submit" value="Play" class="button">
+</form>
